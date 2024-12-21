@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom"; // Co
 import Nav from "./components/Navbar/navbar.jsx";
 import HomePage from "./components/Home/home.jsx";
 import LoginPage from "./components/auth/Login/Login.jsx";
-
+import ScholarshipForm from "./components/scholarship/scholarshipForm.jsx";
 const App = () => {
 
 
@@ -19,6 +19,7 @@ const App = () => {
           element={<HomePage />}
         />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/provide" element={<ScholarshipForm />} />
       </Routes>
     </Router>
   );

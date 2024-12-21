@@ -15,8 +15,19 @@ const createUser = async (req, res) => {
     //     incomeLevel,
     //     financialNeed, // e.g., 'Low', 'Medium', 'High'
     //     appliedScholarships
-    const user = new User(req.body);
-    await user.save();
+    const { name, email, password, academicPerformance, incomeLevel, financialNeed } = req.body;
+    const newUser = new User({
+      name,
+      email,
+      password: password,
+      aiScore: '0',
+      academicPerformance,
+      incomeLevel,
+      financialNeed,
+      appliedScholarships: [],
+    });
+    console.log(newUser)
+    await newUser.save();
     res.status(201).json(user);
   } catch (error) {
     res.status(500).json({ error: "Failed to create user" });
