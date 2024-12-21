@@ -1,15 +1,19 @@
 const mongoose=require("mongoose");
 const scholarshipSchema = new mongoose.Schema({
     name: String,
-    type: String, // e.g., 'Need-based', 'Merit-based'
+    type: String, 
     description: String,
     eligibilityCriteria: { 
-        academicThreshold: Number, // Minimum academic performance score
-        incomeLevel: String, // e.g., 'Low', 'Medium', 'High'
-        financialNeed: String // e.g., 'Low', 'Medium', 'High'
+        academicThreshold: Number, 
+        incomeLevel: String, 
+        financialNeed: String 
     },
     awardAmount: Number,
-    applicants: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }] // Reference to User
-});
+    applicants: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }] ,// Reference to User,
+    
+},
+
+
+);
 
 module.exports = mongoose.model('Scholarship', scholarshipSchema);

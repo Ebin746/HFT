@@ -1,13 +1,18 @@
 const express=require("express");
 const app=express();
 require('dotenv').config();
-
+const cors=require("cors");
 const dataBaseConnection =require("./mongo/dataBase");
 
 const user=require("./routes/user")
 const scholarship=require("./routes/scholarship")
 const aiChat=require("./routes/ai");
 
+
+app.use(cors({
+    origin: "http://localhost:5173", // Allow requests from your Vite frontend
+    credentials: true,              // If cookies or credentials are involved
+  }));
 app.use(express.json())
 
 

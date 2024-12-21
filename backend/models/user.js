@@ -8,10 +8,10 @@ const userSchema = new mongoose.Schema({
         type:String,
         default:0
     },
-    academicPerformance: Number, // Score out of 10
-    incomeLevel: String, // e.g., 'Low', 'Medium', 'High'
-    financialNeed: String, // e.g., 'Low', 'Medium', 'High'
-    appliedScholarships: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Scholarship' }] // Reference to Scholarship
+    academicPerformance: Number,
+    incomeLevel: String, 
+    financialNeed: String, 
+    appliedScholarships: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Scholarship' }] 
 });
 
 module.exports = mongoose.model('User', userSchema);
