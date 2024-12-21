@@ -1,0 +1,49 @@
+/* Styling for the Home Component */
+body{
+  overflow: hidden;
+}
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: #ffffff;
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+  padding: 20px;
+  
+}
+
+h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+p {
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.getStartedButton {
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  color: #6a11cb;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.getStartedButton:hover {
+  background-color: #f0f0f0;
+  transform: scale(1.05);
+}
+
+.getStartedButton:active {
+  transform: scale(0.95);
+}

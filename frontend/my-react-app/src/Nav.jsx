@@ -1,16 +1,17 @@
 // Nav.jsx
 import React from 'react';
 import styles from './Nav.module.css'; // Importing the module stylesheet
+import { Link } from 'react-router-dom';
 
 const Nav = () => {
   return (
     <nav className={styles.navbar}>
       <div className={styles.logo}>Scholarship Knight</div>
       <ul className={styles.navLinks}>
-        <li><a href="#home" className={styles.navLink}>Home</a></li>
-        <li><a href="#about" className={styles.navLink}>About</a></li>
-        <li><a href="#services" className={styles.navLink}>Services</a></li>
-        <li><a href="#contact" className={styles.navLink}>Contact</a></li>
+        <li><Link to="/home" className={styles.navLink}>Home</Link></li>
+        <li><Link to="/login" className={styles.navLink}>login</Link></li>
+        <li><Link to="/signUp" className={styles.navLink}>Signup</Link></li>
+        
       </ul>
     </nav>
   );

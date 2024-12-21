@@ -1,0 +1,115 @@
+/* Styling for Login Component */
+
+/* General wrapper styles */
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #89f7fe, #66a6ff);
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Illustration styling */
+.illustration {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.illustration img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Form container */
+.form {
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 100%;
+}
+
+.heading {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+form div {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background: #66a6ff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background: #559bff;
+}
+
+button:active {
+  background: #4488ff;
+}
+
+p {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+p a {
+  color: #66a6ff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+p a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+  .wrapper {
+    padding: 10px;
+  }
+
+  .form {
+    padding: 20px;
+  }
+
+  .heading {
+    font-size: 1.5rem;
+  }
+}
