@@ -10,8 +10,7 @@ const aiChat=require("./routes/ai");
 
 
 app.use(cors({
-    origin: "http://localhost:5173", // Allow requests from your Vite frontend
-    credentials: true,              // If cookies or credentials are involved
+    origin: "http://localhost:5173",             // If cookies or credentials are involved
   }));
 app.use(express.json())
 
