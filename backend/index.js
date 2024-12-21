@@ -6,11 +6,14 @@ const dataBaseConnection =require("./mongo/dataBase");
 
 const user=require("./routes/user")
 const scholarship=require("./routes/scholarship")
+const aiChat=require("./routes/ai");
+
 app.use(express.json())
 
 
 app.use("/user",user);
 app.use("/scholarship",scholarship);
+app.use("/ai", aiChat);
 
 app.listen(3000,()=>{
     dataBaseConnection()
