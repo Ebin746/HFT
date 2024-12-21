@@ -1,6 +1,9 @@
 const express=require("express");
 const app=express();
+require('dotenv').config();
+
 const dataBaseConnection =require("./mongo/dataBase");
+
 const user=require("./routes/user")
 const scholarship=require("./routes/scholarship")
 app.use(express.json())

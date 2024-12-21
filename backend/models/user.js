@@ -4,6 +4,10 @@ const userSchema = new mongoose.Schema({
     name: String,
     email: String,
     password: String,
+    aiScore:{
+        type:String,
+        default:0
+    },
     academicPerformance: Number, // Score out of 10
     incomeLevel: String, // e.g., 'Low', 'Medium', 'High'
     financialNeed: String, // e.g., 'Low', 'Medium', 'High'
