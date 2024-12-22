@@ -1,121 +1,182 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+// components/AddScholarship.jsx
+import React, { useState } from "react";
+import axios from "axios";
 
-const LoginPage = () => {
-  const [isSignUp, setIsSignUp] = useState(true);
+const ScholarshipForm = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    aiScore: '0', // Default value
-    academicPerformance: '',
-    incomeLevel: '',
-    financialNeed: '',
-    appliedScholarships: [],
+    name: "",
+    type: "",
+    description: "",
+    academicThreshold: "",
+    incomeLevel: "",
+    financialNeed: "",
+    awardAmount: "",
+    Deadline:""
   });
 
-  const toggleForm = () => {
-    setIsSignUp((prev) => !prev);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const endpoint = isSignUp ? '/user/signup' : '/api/auth/signin';
     try {
-      const response = await axios.post(endpoint, formData);
-      alert(response.data.message);
-      // Redirect to home or another page after successful login/signup
+      const payload = {
+        name: formData.name,
+        type: formData.type,
+        description: formData.description,
+        eligibilityCriteria: {
+          academicThreshold: parseFloat(formData.academicThreshold),
+          incomeLevel: formData.incomeLevel,
+          financialNeed: formData.financialNeed,
+        },
+        awardAmount: parseFloat(formData.awardAmount),
+        Deadline:formData.Deadline
+      };
+
+      const response = await axios.post("http://localhost:3000/scholarship", payload);
+      alert("Scholarship added successfully!");
+      setFormData({
+        name: "",
+        type: "",
+        description: "",
+        academicThreshold: "",
+        incomeLevel: "",
+        financialNeed: "",
+        awardAmount: "",
+        Deadline:""
+      });
     } catch (error) {
       console.error(error);
-      alert('Error occurred, please try again');
+      alert("Error adding scholarship. Please try again.");
     }
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
   return (
-    <div>
-      <h1>{isSignUp ? 'Sign Up' : 'Sign In'}</h1>
-      <form onSubmit={handleSubmit}>
-        {isSignUp && (
-          <>
-            <div>
-              <label>Name</label>
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <label>Academic Performance</label>
-              <input
-                type="number"
-                name="academicPerformance"
-                value={formData.academicPerformance}
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <label>Income Level</label>
-              <select
-                name="incomeLevel"
-                value={formData.incomeLevel}
-                onChange={handleChange}
-              >
-                <option value="">Select Income Level</option>
-                <option value="low">Low</option>
-                <option value="medium">Medium</option>
-                <option value="high">High</option>
-              </select>
-            </div>
-            <div>
-              <label>Financial Need</label>
-              <select
-                name="financialNeed"
-                value={formData.financialNeed}
-                onChange={handleChange}
-              >
-                <option value="">Select Financial Need</option>
-                <option value="low">Low</option>
-                <option value="medium">Medium</option>
-                <option value="high">High</option>
-              </select>
-            </div>
-          </>
-        )}
-        <div>
-          <label>Email</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label>Password</label>
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-          />
-        </div>
-        <button type="submit">{isSignUp ? 'Sign Up' : 'Sign In'}</button>
+    <div style={styles.container}>
+      <h1 style={styles.title}>Add a New Scholarship</h1>
+      <form onSubmit={handleSubmit} style={styles.form}>
+        <input
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          placeholder="Scholarship Name"
+          style={styles.input}
+          required
+        />
+        <input
+          type="text"
+          name="type"
+          value={formData.type}
+          onChange={handleChange}
+          placeholder="Scholarship Type"
+          style={styles.input}
+          required
+        />
+        <textarea
+          name="description"
+          value={formData.description}
+          onChange={handleChange}
+          placeholder="Description"
+          style={{ ...styles.input, height: "100px" }}
+          required
+        />
+        <input
+          type="number"
+          name="academicThreshold"
+          value={formData.academicThreshold}
+          onChange={handleChange}
+          placeholder="Academic Threshold (e.g., 80)"
+          style={styles.input}
+          required
+        />
+        <input
+          type="text"
+          name="incomeLevel"
+          value={formData.incomeLevel}
+          onChange={handleChange}
+          placeholder="Income Level"
+          style={styles.input}
+          required
+        />
+        <input
+          type="text"
+          name="financialNeed"
+          value={formData.financialNeed}
+          onChange={handleChange}
+          placeholder="Financial Need"
+          style={styles.input}
+          required
+        />
+        <input
+          type="number"
+          name="awardAmount"
+          value={formData.awardAmount}
+          onChange={handleChange}
+          placeholder="Award Amount"
+          style={styles.input}
+          required
+        />
+         <input
+          type="number"
+          name="Deadline"
+          value={formData.Deadline}
+          onChange={handleChange}
+          placeholder="in minutes"
+          style={styles.input}
+          required
+        />
+        <button type="submit" style={styles.button}>
+          Submit
+        </button>
       </form>
-      <button onClick={toggleForm}>
-        {isSignUp ? 'Already have an account? Sign In' : "Don't have an account? Sign Up"}
-      </button>
     </div>
   );
 };
 
-export default LoginPage;
+const styles = {
+  container: {
+    background: "linear-gradient(135deg, #00c6ff, #0072ff)",
+    minHeight: "100vh",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    color: "white",
+  },
+  title: {
+    marginBottom: "20px",
+    fontSize: "2rem",
+    fontWeight: "bold",
+  },
+  form: {
+    background: "white",
+    borderRadius: "8px",
+    padding: "30px",
+    boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+    maxWidth: "400px",
+    width: "100%",
+  },
+  input: {
+    width: "100%",
+    padding: "10px",
+    margin: "10px 0",
+    borderRadius: "4px",
+    border: "1px solid #ccc",
+    fontSize: "1rem",
+  },
+  button: {
+    background: "#007bff",
+    color: "white",
+    padding: "10px 20px",
+    border: "none",
+    borderRadius: "4px",
+    cursor: "pointer",
+    fontSize: "1rem",
+    width: "100%",
+  },
+};
+
+export default ScholarshipForm;

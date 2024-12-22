@@ -1,15 +1,35 @@
 const Scholarship = require('../models/scholarship'); // Import Scholarship model
 
-// Create a new scholarship
 const createScholarship = async (req, res) => {
     try {
-        const scholarship = new Scholarship(req.body);
+        // Destructure the scholarship data from the request body
+        const { name, type, description, eligibilityCriteria, awardAmount, applicants, Deadline } = req.body;
+console.log(Deadline)
+        // Validate required fields (you can expand this validation based on your needs)
+        if (!name || !type || !description || !eligibilityCriteria || !awardAmount || !Deadline) {
+            return res.status(400).json({ error: 'Missing required fields' });
+        }
+
+        // Create a new scholarship instance using the destructured values
+        const scholarship = new Scholarship({
+            name,
+            type,
+            description,
+            eligibilityCriteria,
+            awardAmount,
+            applicants,
+            Deadline
+        });
+
+        // Save the scholarship and return the result
         await scholarship.save();
         res.status(201).json(scholarship);
     } catch (error) {
+        console.error(error);  // Log the error for debugging
         res.status(500).json({ error: 'Failed to create scholarship' });
     }
 };
+
 
 // Get all scholarships
 const getScholarships = async (req, res) => {

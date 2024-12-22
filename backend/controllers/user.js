@@ -7,14 +7,6 @@ const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 // Create a new user
 const createUser = async (req, res) => {
   try {
-    // name,
-    //     email,
-    //     password,
-    //     aiScore,
-    //     academicPerformance,
-    //     incomeLevel,
-    //     financialNeed, // e.g., 'Low', 'Medium', 'High'
-    //     appliedScholarships
     const { name, email, password, academicPerformance, incomeLevel, financialNeed } = req.body;
     const newUser = new User({
       name,
@@ -47,6 +39,7 @@ const getUsers = async (req, res) => {
 // Apply for a scholarship
 const applyScholarship = async (req, res) => {
   const { userId, scholarshipId } = req.body;
+  console.log(userId, "::",scholarshipId);
   let aiScore, aiNeed;
   try {
     const user = await User.findById(userId);
@@ -82,12 +75,10 @@ const applyScholarship = async (req, res) => {
  
 
     // Handle if the response is malformed or missing data
-    if (!aiScore || !aiNeed) {
-      return res.status(500).json({ error: "AI response malformed" });
-    }
+
 
     // Assign AI score and reason to user
-    user.aiScore=aiScore;
+    user.aiScore=aiScore||0;
     user.appliedScholarships.push(scholarshipId);
 
     // Add the user to the scholarship applicants list

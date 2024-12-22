@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'; 
 import axios from 'axios';
+import styles from './LoginPage.module.css'; // Importing the CSS module
 
-const AuthPage = () => {
+const LoginPage= () => {
   const [isSignUp, setIsSignUp] = useState(true);
   const [formData, setFormData] = useState({
     name: '',
@@ -27,15 +28,15 @@ const AuthPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
-     const endpoint = 'http://localhost:3000/user'
+    const endpoint = 'http://localhost:3000/user'
     try {
       console.log(endpoint);
       const response = await axios.post(endpoint, formData);
-      console.log(response.data);
+      console.log(response);
 
       // Save user data to localStorage and update state
-      if (response.data) {
-        localStorage.setItem('user', JSON.stringify(response.data.user));
+      if (response) {
+        localStorage.setItem('user', JSON.stringify(response.data._id));
         setIsLoggedIn(true);
       }
     } catch (error) {
@@ -59,21 +60,21 @@ const AuthPage = () => {
   };
 
   return (
-    <div>
+    <div className={styles.wrapper}>
       <nav>
         {isLoggedIn ? (
           <button onClick={handleSignOut}>Sign Out</button>
         ) : (
-          <button onClick={toggleForm}>
+          <button className={styles.switchButton} onClick={toggleForm}>
             {isSignUp ? 'Already have an account? Sign In' : "Don't have an account? Sign Up"}
           </button>
         )}
       </nav>
 
       {!isLoggedIn && (
-        <div>
-          <h1>{isSignUp ? 'Sign Up' : 'Sign In'}</h1>
-          <form onSubmit={handleSubmit}>
+        <div className={isSignUp ? styles.signupWrapper : ''}>
+          <h1 className={styles.heading}>{isSignUp ? 'Sign Up' : 'Sign In'}</h1>
+          <form onSubmit={handleSubmit} className={styles.form}>
             {isSignUp && (
               <div>
                 <label>Name</label>
@@ -150,4 +151,4 @@ const AuthPage = () => {
   );
 };
 
-export default AuthPage;
+export default LoginPage;

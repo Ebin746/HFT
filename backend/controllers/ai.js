@@ -25,7 +25,7 @@ const ai = async (req, res) => {
             - Income level
             - Scholarship type
 
-            select one  student retun his id and name  , response in should contain only name and id 
+            select one  student retun his id and name  , response must  should contain only name and id in this format {id-name} 
             Scholarship type: ${scholarshipDeatils}
             Students details: ${applicants}
             

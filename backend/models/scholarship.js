@@ -9,7 +9,9 @@ const scholarshipSchema = new mongoose.Schema({
         financialNeed: String 
     },
     awardAmount: Number,
+    Deadline: Number,
     applicants: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }] ,// Reference to User,
+
     
 },
 
